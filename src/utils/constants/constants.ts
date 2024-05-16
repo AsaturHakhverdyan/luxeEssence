@@ -2,7 +2,6 @@ export const BASE_URL = "https://tiknikstyle.10web.site/wp-json";
 export const CONSUMER_KEY = process.env.REACT_APP_CONSUMER_KEY as string;
 
 export const LOGIN_URL = "/jwt-auth/v1/token";
-export const WC_V3 = "wc/v3";
 export const SEND_CHECKOUT = "/wc/v3/orders?";
 export const BASE_PRODUCT = "wholesale/products?filter[pa_market]=446";
 export const PRODUCTS = "products";

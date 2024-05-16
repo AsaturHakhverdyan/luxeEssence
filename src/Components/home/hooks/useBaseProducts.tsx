@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { BASE_PRODUCT, BASE_URL, QUERY_PARAMS } from "../../../utils/constants/constants";
+import { QUERY_PARAMS } from "../../../utils/constants/constants";
 import { ICatchError, IProducts } from "../../../utils/interface";
 
 const useBaseProducts = (
@@ -10,7 +10,6 @@ const useBaseProducts = (
 ) => {
   const [productsData, setProductsData] = useState<IProducts[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
-  const [oerderBySort, setOrderBySort] = useState<string>();
   const [currencyName, setCurrencyName] = useState<string>();
   const [searchParams] = useSearchParams();
   const [isError, setIsError] = useState<ICatchError>();
@@ -20,11 +19,6 @@ const useBaseProducts = (
   const categories = searchParams.get(QUERY_PARAMS.CATEGORY) || "";
 
 
-  useEffect(() => {
-    if (OrderBy) {
-      setOrderBySort(`?orderby=${OrderBy}`);
-    }
-  }, [OrderBy]);
 
   useEffect(() => {
     (async () => {

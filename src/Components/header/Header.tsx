@@ -12,6 +12,7 @@ const Header = () => {
   const [userInfo, setUserInfo] = useState<string>("");
   const basket = useSelector((state: RootState) => state.basket);
   const token = localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN)
+  const [sayAboutLogin, toggleSayAboutLogin] = useState<boolean>(false);
 
   useEffect(() => {
     const user = localStorage.getItem(LOCAL_STORAGE_KEYS.USERNAME);
@@ -25,9 +26,18 @@ const Header = () => {
     await axios.post("https://payl.10web.cloud/api/users/logout")
     localStorage.clear()
     setUserInfo("");
+  };
+
+  const showErrorMessage = () => {
+    if (token) {
+      return;
+    }
+    toggleSayAboutLogin(true);
+    setTimeout(() => {
+      toggleSayAboutLogin(false)
+    }, 1000)
   }
 
-  console.log(token, userInfo)
   return (
     <div className="py-[20px]  px-2 mb-[30px] border-b-2">
       <div className="block md:flex justify-between items-center relative">
@@ -56,8 +66,13 @@ const Header = () => {
           </div>
         </div>
         <div className="block md:flex items-center">
-          <div className="flex items-center">
-            <div className="flex mx-2">
+          <div className="flex items-center relative">
+            {sayAboutLogin ? (
+              <div className="bg-red-200 py-1 px-4 rounded-lg duration-150">
+                <p>{`<--- Խնդրում ենք մուտք գործեք`}</p>
+              </div>
+            ) : null}
+            <div className="flex mx-2" onClick={showErrorMessage}>
               <Link
                 to={token ? PAGES.BASKET : PAGES.HOME}
                 className="bg-[#F1EFE8] flex items-center justify-center p-2 rounded-xl ml-2 cursor-pointer"
@@ -65,7 +80,7 @@ const Header = () => {
                 <div className="relative">
                   <CiHeart size={24} />
                   <p className="absolute top-[-15px] right-[-20px] font-[700] text-[13px]">
-                    ({basket.length})
+                    ({basket && basket.length})
                   </p>
                 </div>
               </Link>

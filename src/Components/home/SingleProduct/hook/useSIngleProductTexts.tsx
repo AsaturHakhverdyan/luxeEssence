@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { SINGLE_PRODUCT_TEXTS } from "../../../../utils/constants/constants";
 import { ISinglePageTexts } from "../../../../utils/interface";
 
 const useSIngleProductTexts = () => {

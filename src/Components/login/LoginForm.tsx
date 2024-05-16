@@ -4,7 +4,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Photo from "../../images/luse.jpg";
 import {
   LOCAL_STORAGE_KEYS,
-  LOGIN_URL,
   PAGES,
 } from "../../utils/constants/constants";
 import { ICatchError } from "../../utils/interface";

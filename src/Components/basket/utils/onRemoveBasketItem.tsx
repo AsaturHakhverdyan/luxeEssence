@@ -1,25 +1,24 @@
 import axios from "axios";
 import { setBasket } from "../../../store/createSlice";
 import Store from "../../../store/store";
-import { CONSUMER_KEY, LOCAL_STORAGE_KEYS } from "../../../utils/constants/constants";
+import { LOCAL_STORAGE_KEYS } from "../../../utils/constants/constants";
+import { getNonce } from "./Utils";
 
 export const onRemoveBasketItem = async (
   key: string | number,
   setRemoveItemLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
+  const cookie = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN) || "")
   setRemoveItemLoading(true);
+  const nonce = await getNonce()
   const { data } = await axios.post(
-    `/wc/store/cart/remove-item?${CONSUMER_KEY}`,
-    JSON.stringify({
+    `https://hydralab-dev.10web.site/wp-json/removeItem/wishlist?cookie=${cookie}`,
+    {
       key,
-    }),
+    },
     {
       headers: {
-        Nonce: `${localStorage.getItem(LOCAL_STORAGE_KEYS.NONCE)}`,
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem(
-          LOCAL_STORAGE_KEYS.JWT_TOKEN
-        )}`,
+        nonce
       },
     }
   );

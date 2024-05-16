@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { HOME_PAGE_TEXTS } from "../../../utils/constants/constants";
 import { IHomePageTexts } from "../../../utils/interface";
 
 const useHomePageTexts = () => {

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_CATEGORIES } from "../../../../utils/constants/constants";
 import { ICatchError, ICategories } from "../../../../utils/interface";
 
 const useGetCategories = () => {

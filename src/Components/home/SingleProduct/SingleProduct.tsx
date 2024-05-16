@@ -5,22 +5,14 @@ import {
   ICatchError,
   IVariationAttributes,
 } from "../../../utils/interface";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import useSingleProduct from "./hook/useSingleProduct";
 import {
-  ERROR_MASSEGE,
   PAGES,
   SINGLE_PRODUCT_TYPES,
   SWIPER_SINGLE_CONFIG,
 } from "../../../utils/constants/constants";
 import SingleProductSkeleton from "../../../skeleton/SingleProductSkeleton";
 import useSIngleProductTexts from "./hook/useSIngleProductTexts";
-import GlassesInfo from "./components/GlassesInfo";
-import LinsInfo from "./components/LinsInfo";
 import { TfiBackLeft } from "react-icons/tfi";
 import { AddToCartFunction } from "./components/utils/AddToCartFunction";
 import Loader from "../../../utils/loader/Loader";
@@ -62,21 +54,11 @@ const SingleProduct = () => {
         <>
           <div className="relative mx-auto grid  grid-cols-1 gap-5 md:grid-cols-2 my-5 border rounded-xl p-2">
             <div className="relative flex items-center justify-center overflow-hidden">
-              <Swiper
-                {...SWIPER_SINGLE_CONFIG}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="rounded-xl"
-              >
-                {singleProduct?.images.map((image) => (
-                  <SwiperSlide key={image.src}>
-                    <img
-                      src={image?.src}
-                      alt="products"
-                      className="w-full h-[330px] md:h-[400px] lg:h-[500px] object-contain"
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              <img
+                src={singleProduct?.images[0]?.src}
+                alt="products"
+                className="w-full h-[330px] md:h-[400px] lg:h-[500px] object-contain"
+              />
               {singleProduct?.stock_status ===
                 SINGLE_PRODUCT_TYPES.OUT_OFF_STOCK && (
                   <div className="absolute px-3 rounded-full text-center bg-red-500 left-1 top-1  flex items-center justify-center p-1 text-white z-10">
@@ -103,7 +85,7 @@ const SingleProduct = () => {
                   <div>
                     <p className="text-[16px]">{singleProduct?.sku}</p>
                     <h1 className="text-[18px] xs:text-[25px] md:text[20px] lg:text-[2rem] font-[700]">
-                      {singleProduct?.name}
+                      {singleProduct?.name} ssdsdsdsds
                     </h1>
                   </div>
                 </div>
@@ -126,22 +108,9 @@ const SingleProduct = () => {
                       </p>
                     </div>
                   )}
-                  {singleProduct?.stock_quantity ? (
-                    <div className="flex font-[400]">
-                      <p>{singleProductTexts?.count.description}</p>
-                      <span className="ml-2 font-[500]">
-                        {singleProduct?.stock_quantity}
-                      </span>
-                    </div>
-                  ) : null}
                 </div>
               </div>
               <div className="mt-2">
-                <IncrementDecrement
-                  name={singleProductTexts?.toChoose.description}
-                  stockQuantity={singleProduct?.stock_quantity}
-                  onChangeCount={onChangeCount}
-                />
                 <div className="mt-2 lg:mt-4 lg:flex justify-between items-center">
                   <div>
                     <button
@@ -169,23 +138,11 @@ const SingleProduct = () => {
                           : "border-2 text-[#384275] font-[600] border-[#384275] rounded-xl bg-transparent text-[14px] xs:text-[16px] px-5 py-[5px] flex items-center justify-center hover:border-cyan-700 cursor-pointer duration-150"
                       }
                     >
-                      <p>{singleProductTexts?.addToCart.description}</p>
+                      <p className="select-none">{singleProductTexts?.addToCart.description}</p>
                       <CiHeart size={24} />
                     </button>
-                    {addToCartCatchError?.data.message ===
-                      ERROR_MASSEGE.NoMatchingVariation && (
-                        <p className="text-red-500 font-[600]">
-                          {singleProductTexts?.fillAllFields.description}
-                        </p>
-                      )}
-                    {addToCartCatchError?.data.message ===
-                      ERROR_MASSEGE.ThisItemIsAreadyInCart && (
-                        <p className="text-red-500 font-[600]">
-                          {singleProductTexts?.alreadyInTheCart.description}
-                        </p>
-                      )}
                     {addToCartLoading && (
-                      <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-center mt-2">
                         <Loader loading={addToCartLoading} size={20} />
                       </div>
                     )}
@@ -198,7 +155,7 @@ const SingleProduct = () => {
       ) : null}
       {isError ? (
         <div className="text-center">
-          <h1>{isError.data.message}</h1>
+          <h1>Error</h1>
         </div>
       ) : null}
     </div>

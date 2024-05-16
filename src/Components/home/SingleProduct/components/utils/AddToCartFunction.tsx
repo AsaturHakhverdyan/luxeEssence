@@ -3,14 +3,13 @@ import axios from "axios";
 import { setBasket } from "../../../../../store/createSlice";
 import Store from "../../../../../store/store";
 import {
-  CONSUMER_KEY,
   LOCAL_STORAGE_KEYS,
-  SINGLE_PRODUCT_TYPES,
 } from "../../../../../utils/constants/constants";
 import {
   ICatchError,
   IVariationAttributes,
 } from "../../../../../utils/interface";
+import { getNonce } from "../../../../basket/utils/Utils";
 
 export const AddToCartFunction = async (
   id: number | undefined,
@@ -23,35 +22,23 @@ export const AddToCartFunction = async (
   variationAdd: string | undefined,
   variationAttributes: IVariationAttributes[] | undefined
 ) => {
-
-  const data: {
-    id?: number;
-    quantity: number;
-    variation?: IVariationAttributes[] | undefined;
-  } = {
-    id: id,
-    quantity: count,
-  };
-  if (variationAdd === SINGLE_PRODUCT_TYPES.IN_STOCK) {
-    data.variation = variationAttributes;
-  }
+  const cookie = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN) || '')
   try {
     setAddToCartLoading(true);
     setAnimationCart(true);
     if (!id) {
       return false;
     } else {
-      const response = await axios.post(
-        `/wc/store/v1/cart/add-item?${CONSUMER_KEY}`,
-        data,
+      const nonce = await getNonce()
+      const response = await axios.post(`https://hydralab-dev.10web.site/wp-json/add/wishlist?cookie=${cookie}`,
+        {
+          id: id,
+          quantity: count
+        },
         {
           headers: {
-            Nonce: localStorage.getItem(LOCAL_STORAGE_KEYS.NONCE),
-            "Content-Type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${localStorage.getItem(
-              LOCAL_STORAGE_KEYS.JWT_TOKEN
-            )}`,
-          },
+            nonce
+          }
         }
       );
       if (response.status) {

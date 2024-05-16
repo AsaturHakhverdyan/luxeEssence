@@ -192,7 +192,6 @@ export interface IBasketProduct {
     attribute: string;
     value: string;
   }[];
-  onCheckBasketItem: (id: number) => void;
   checkoutBasket: IBasketProduct[];
 }
 

@@ -2,31 +2,32 @@ import axios from "axios";
 import { setBasket } from "../../../store/createSlice";
 import Store from "../../../store/store";
 import {
-  CONSUMER_KEY,
   LOCAL_STORAGE_KEYS,
 } from "../../../utils/constants/constants";
-import { IBasketProduct } from "../../../utils/interface";
+import { getNonce } from "./Utils";
 
 export const onRemoveAllBasket = (
   setBasketRemoveLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   (async () => {
-    setBasketRemoveLoading(true)
-    const { data } = await axios.delete(
-      `/wc/store/cart/items?${CONSUMER_KEY}`,
-      {
-        headers: {
-          Nonce: `${localStorage.getItem(LOCAL_STORAGE_KEYS.NONCE)}`,
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem(
-            LOCAL_STORAGE_KEYS.JWT_TOKEN
-          )}`,
-        },
+    try {
+      const cookie = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN) || '')
+      setBasketRemoveLoading(true)
+      const nonce = await getNonce()
+      const { data } = await axios.post(`https://hydralab-dev.10web.site/wp-json/clear/wishlist?cookie=${cookie}`,
+        {
+          headers: {
+            nonce
+          }
+        }
+      );
+      if (data) {
+        Store.dispatch(setBasket(data));
+        setBasketRemoveLoading(false)
       }
-    );
-    if (data) {
-      Store.dispatch(setBasket(data));
+    } catch (error) {
       setBasketRemoveLoading(false)
+      console.error(error)
     }
   })();
 };
