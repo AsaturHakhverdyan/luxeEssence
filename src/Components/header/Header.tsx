@@ -47,15 +47,16 @@ const Header = () => {
               <button
                 className="text-[13px] mr-2 px-[10px] py-[2px] bg-[#F1EFE8] border border-[#F1EFE8] text-[#384275] rounded-xl"
                 onClick={logOut}
-              >
+              > 
                 <CiLogout size={24} />
               </button>
               :
               <button
-                className="text-[13px] mr-2 px-[10px] py-[2px] bg-[#F1EFE8] border border-[#F1EFE8] text-[#384275] rounded-xl"
+                className="flex text-[13px] mr-2 px-[10px] py-[2px] bg-[#F1EFE8] border border-[#F1EFE8] text-[#384275] rounded-xl"
                 onClick={() => navigate("/login")}
               >
-                <CiUser size={24} />
+                <CiUser size={30} />
+                <h3>Մուտք/Գրանցում</h3>
               </button>
             }
             <div className="hidden md:flex">
