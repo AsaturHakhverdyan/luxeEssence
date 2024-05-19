@@ -3,8 +3,9 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { ICatchError } from '../../utils/interface';
 import axios from 'axios';
 import Loader from '../../utils/loader/Loader';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PAGES } from '../../utils/constants/constants';
+import logo from '../../images/logo.jpg';
 
 const SignUp = () => {
 
@@ -67,8 +68,17 @@ const SignUp = () => {
   }
 
   return (
-    <div className="w-full h-screen flex items-center justify-around p-3 border mt-5 rounded-md px-4">
+    <div className="max-w-[1100px] mx-auto py-5 px-4">
+      <div className="flex items-center justify-center relative">
+        <Link to={PAGES.HOME}>
+          <img src={logo} alt="logo" className="w-40" />
+        </Link>
+      </div>
+
       <div className="flex md:block justify-center max-w-3xl w-full">
+        <div className='border-b-2 border-sky-800'>
+          <h1 className='text-center text-[24px]  font-bold text-sky-800 md:text-[2rem] md:text-left '>ԳՐԱՆՑՈՒՄ</h1>
+        </div>
         <form
           className="flex flex-col max-w-[800px] text-left mt-5 md:w-full"
           onSubmit={(event) => signUpFormHandler(event)}
@@ -78,14 +88,11 @@ const SignUp = () => {
               Օգտանուն
             </span>
             <input
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUsername(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
               value={username}
               type="text"
               name="text"
-              className="w-full border border-sky-900 mt-2 mb-3 p-2 outline-none rounded-md"
-            />
+              className="w-full border border-sky-900 mt-2 mb-3 p-2 outline-none rounded-md" />
             {wrongEmail ? <p>{wrongEmail}</p> : null}
           </label>
           <label className="relative">
@@ -93,24 +100,19 @@ const SignUp = () => {
               Ծածկագիր
             </span>
             <input
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUserpassword(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserpassword(e.target.value)}
               value={userpassword}
               type={!showpassword ? "password" : "text"}
               name="password"
-              className="w-full border border-sky-900 mt-2 p-2 outline-none rounded-md"
-            />
+              className="w-full border border-sky-900 mt-2 p-2 outline-none rounded-md" />
             {!showpassword ? (
               <AiOutlineEye
                 className="absolute right-2 top-11 text-teal-900"
-                onClick={() => setShowpassword((prev) => !prev)}
-              />
+                onClick={() => setShowpassword((prev) => !prev)} />
             ) : (
               <AiOutlineEyeInvisible
                 className="absolute right-2 top-11 text-teal-900"
-                onClick={() => setShowpassword((prev) => !prev)}
-              />
+                onClick={() => setShowpassword((prev) => !prev)} />
             )}
           </label>
           <label className="relative mt-2">
@@ -118,25 +120,20 @@ const SignUp = () => {
               Կրկնել Ծածկագիրը
             </span>
             <input
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setUserpassword2(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserpassword2(e.target.value)}
               value={userpassword2}
               type={!showpassword2 ? "password" : "text"}
               name="password"
-              className="w-full border border-sky-900 mt-2 p-2 outline-none rounded-md"
-            />
+              className="w-full border border-sky-900 mt-2 p-2 outline-none rounded-md" />
             {samePasswordWrong ? <p className='text-red-800'>{samePasswordWrong}</p> : null}
             {!showpassword2 ? (
               <AiOutlineEye
                 className="absolute right-2 top-11 text-teal-900"
-                onClick={() => setShowpassword2((prev) => !prev)}
-              />
+                onClick={() => setShowpassword2((prev) => !prev)} />
             ) : (
               <AiOutlineEyeInvisible
                 className="absolute right-2 top-11 text-teal-900"
-                onClick={() => setShowpassword2((prev) => !prev)}
-              />
+                onClick={() => setShowpassword2((prev) => !prev)} />
             )}
           </label>
           <label className='flex items-center justify-center bg-sky-900 text-sky-100 font-bold text-[18px]  mt-3 rounded-md hover:bg-sky-300 hover:text-sky-900 duration-300 cursor-pointer'>
@@ -147,10 +144,14 @@ const SignUp = () => {
               <input
                 type="submit"
                 className="uppercase w-full px-4 py-[8px]"
-                value={"Գրանցվել"}
-              />
-            }
+                value={"Գրանցվել"} />}
           </label>
+          <p
+            onClick={() => navigate(PAGES.LOGIN)}
+            className="text-[px] font-[600] text-sky-900 mt-1 underline hover:no-underline cursor-pointer"
+          >
+            Մուտք Գործել
+          </p>
         </form>
       </div>
     </div>

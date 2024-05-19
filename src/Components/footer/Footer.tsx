@@ -9,16 +9,18 @@ const Footer = () => {
       <div className="md:flex justify-around flex-wrap text-c">
         <div className="flex items-center text-center mt-2 p-2">
           <IoLocationOutline size={24} />
-          <h1 className="ml-2">Ալեք Մանուկյան 1</h1>
+          <h1 className="ml-2">
+            <a href="https://maps.app.goo.gl/fHH69hE8YjFm2MwE7" target="_blank">Ալեք Մանուկյան 1</a>
+            </h1>
         </div>
         <div className="flex items-center mt-2 p-2 text-center border-t-2 md:border-0">
           <MdOutlinePhoneInTalk size={24} />
           <div className="ml-2">
             <p className="hover:underline duration-150">
-              +374 90 90 90 90
+              <a href="tel:+37490909090">+374 90 90 90 90</a>
             </p>
             <p className="hover:underline duration-150">
-              +374 90 90 90 91
+              <a href="tel:+37490909091">+374 90 90 90 91</a>
             </p>
           </div>
         </div>

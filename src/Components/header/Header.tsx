@@ -72,12 +72,17 @@ const Header = () => {
             </Link>
           </div>
           <div>
-            <a href="#footer" className="text-[24px] font-[700] hover:text-[#2b355d]">
-              Կոնտակտներ
+            <Link to={PAGES.HOME} className="text-[20px] font-[700] hover:text-[#2b355d]">
+              Գլխավոր Էջ
+            </Link>
+          </div>
+          <div>
+            <a href="#footer" className="text-[20px] font-[700] hover:text-[#2b355d]">
+              Կամ Մեզ Հետ
             </a>
           </div>
           <div>
-            <Link to={PAGES.ABOUTUS} className="text-[24px] font-[700] hover:text-[#2b355d]">
+            <Link to={PAGES.ABOUTUS} className="text-[20px] font-[700] hover:text-[#2b355d]">
               Մեր մասին
             </Link>
           </div>
@@ -86,7 +91,7 @@ const Header = () => {
           <div className="flex items-center relative">
             {sayAboutLogin ? (
               <div className="bg-red-200 py-1 px-4 rounded-lg duration-150 w-[280px] flex items-center justify-center absolute top-[4px] right-[50px]">
-                <p className="w-full">{`<--- Խնդրում ենք մուտք գործեք`}</p>
+                <p className="w-full">{`Խնդրում ենք մուտք գործեք`}</p>
               </div>
             ) : null}
             <div className="flex mx-2" onClick={showErrorMessage}>

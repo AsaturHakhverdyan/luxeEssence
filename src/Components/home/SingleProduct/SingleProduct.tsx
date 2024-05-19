@@ -16,6 +16,8 @@ import { TfiBackLeft } from "react-icons/tfi";
 import { AddToCartFunction } from "./components/utils/AddToCartFunction";
 import Loader from "../../../utils/loader/Loader";
 import { CiHeart } from "react-icons/ci";
+import { MdAccessTime, MdOutlinePhoneInTalk } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
 
 const SingleProduct = () => {
   const [addToCartCatchError, setAddToCartCatchError] = useState<ICatchError>();
@@ -51,7 +53,7 @@ const SingleProduct = () => {
           to={PAGES.HOME}
           className="bg-[#384275] text-white px-3 py-1 rounded-xl flex items-center justify-center w-[150px]"
         >
-          դեպի հետ
+          Գլխավոր էջ  
           <TfiBackLeft />
         </Link>
       )}
@@ -136,6 +138,31 @@ const SingleProduct = () => {
                         <Loader loading={addToCartLoading} size={20} />
                       </div>
                     )}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sky font-[600] text-[14px] xs:text-[20px]">
+                    <br />
+                    {singleProduct?.description}
+                  </p>
+                  <br />
+                  <p>Պատվիրելու Համար ՝ </p>
+                  <div className="flex items-center mt-2 p-2 text-center border-t-2 md:border-0">
+                    <MdOutlinePhoneInTalk size={24} />
+                    <div className="ml-2">
+                      <p className="hover:underline duration-150">
+                        <a href="tel:+37490909090">+374 90 90 90 90</a>
+                      </p>
+                      <p className="hover:underline duration-150">
+                        <a href="tel:+37490909091">+374 90 90 90 91</a>
+                      </p>
+                    </div>
+                    <div className="flex items-center text-center mt-2 p-2">
+                      <IoLocationOutline size={24} />
+                      <h1 className="ml-2">
+                        <a href="https://maps.app.goo.gl/fHH69hE8YjFm2MwE7" target="_blank">Ալեք Մանուկյան 1</a>
+                      </h1>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -61,7 +61,7 @@ const LoginForm: React.FC = () => {
         >
           <label>
             <span className="text-sky-700 font-[600] text-[14px] xs:text-[16px]">
-              USERNAME
+              Օգտանուն
             </span>
             <input
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -75,7 +75,7 @@ const LoginForm: React.FC = () => {
           </label>
           <label className="relative">
             <span className="text-sky-700 font-[600] text-[14px] xs:text-[16px]">
-              PASSWORD
+              Գաղտնաբառ
             </span>
             <input
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -98,20 +98,20 @@ const LoginForm: React.FC = () => {
               />
             )}
           </label>
-          <p
-            onClick={() => navigate(PAGES.SIGNUP)}
-            className="text-[15px] font-[600] text-sky-900 mt-1 underline hover:no-underline cursor-pointer"
-          >
-            Գրանցվել
-          </p>
           {loginError ? <p className="text-red-500">
             Օգտատեր չի գտնվել
           </p> : null}
           <input
             type="submit"
             className="uppercase bg-sky-900 text-sky-100 font-bold text-[18px] px-4 py-[8px] mt-3 rounded-md hover:bg-sky-300 hover:text-sky-900 duration-300 cursor-pointer"
-            value={"login"}
+            value={"Մուտք"}
           />
+          <p
+            onClick={() => navigate(PAGES.SIGNUP)}
+            className="text-[px] font-[600] text-sky-900 mt-1 underline hover:no-underline cursor-pointer"
+          >
+            Գրանցվել
+          </p>
         </form>
       </div>
     </div>
