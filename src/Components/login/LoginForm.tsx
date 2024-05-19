@@ -17,10 +17,9 @@ const LoginForm: React.FC = () => {
   const [loginError, setLoginError] = useState<ICatchError>();
 
   const formHandler = async (event: React.SyntheticEvent<HTMLFormElement>) => {
-    console.log("first")
     event.preventDefault();
     try {
-      const result = await axios.post(`https://hydralab-dev.10web.site/wp-json/user-route/generate_auth_cookie/?email=${username}&password=${userpassword}`);
+      const result = await axios.post(`https://hydralab-dev.10web.site/wp-json/user-route/generate_auth_cookie/?username=${username}&password=${userpassword}`);
       if (result) {
         localStorage.setItem(
           LOCAL_STORAGE_KEYS.JWT_TOKEN,
@@ -35,6 +34,9 @@ const LoginForm: React.FC = () => {
       }
     } catch (error: any) {
       setLoginError(error);
+      setTimeout(() => {
+        setLoginError(undefined)
+      }, 1500);
     }
     setUsername("");
     setUserpassword("");
@@ -96,14 +98,14 @@ const LoginForm: React.FC = () => {
               />
             )}
           </label>
-          {/* <p
-            onClick={() => navigate(PAGES.UPDATE_PASS)}
+          <p
+            onClick={() => navigate(PAGES.SIGNUP)}
             className="text-[15px] font-[600] text-sky-900 mt-1 underline hover:no-underline cursor-pointer"
           >
-            Forgot your Password?
-          </p> */}
-          {loginError ? <p>
-            bajanord chi gtnvel
+            Գրանցվել
+          </p>
+          {loginError ? <p className="text-red-500">
+            Օգտատեր չի գտնվել
           </p> : null}
           <input
             type="submit"

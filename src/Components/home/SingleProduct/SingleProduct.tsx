@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import {
   ISingleProducts,
   ICatchError,
-  IVariationAttributes,
 } from "../../../utils/interface";
 import useSingleProduct from "./hook/useSingleProduct";
 import {
+  LOCAL_STORAGE_KEYS,
   PAGES,
   SINGLE_PRODUCT_TYPES,
-  SWIPER_SINGLE_CONFIG,
 } from "../../../utils/constants/constants";
 import SingleProductSkeleton from "../../../skeleton/SingleProductSkeleton";
 import useSIngleProductTexts from "./hook/useSIngleProductTexts";
@@ -17,24 +16,32 @@ import { TfiBackLeft } from "react-icons/tfi";
 import { AddToCartFunction } from "./components/utils/AddToCartFunction";
 import Loader from "../../../utils/loader/Loader";
 import { CiHeart } from "react-icons/ci";
-import IncrementDecrement from "./components/utils/IncrementDecrement";
 
 const SingleProduct = () => {
-  const [variationAttributes, setVariationAttributes] = useState<
-    IVariationAttributes[]
-  >([]);
   const [addToCartCatchError, setAddToCartCatchError] = useState<ICatchError>();
   const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
   const [animationCart, setAnimationCart] = useState<boolean>(false);
   const [singleProduct, setSingleProduct] = useState<ISingleProducts>();
-  const [productCount, setProductCount] = useState<number>(1);
+  const [showAddError, setShowAddError] = useState<string>("");
   const { isError, isLoading } = useSingleProduct(setSingleProduct);
   const { singleProductTexts } = useSIngleProductTexts();
-  const choose = singleProductTexts?.toChoose?.description;
 
-  const onChangeCount = (count: number) => {
-    setProductCount(count + 1);
-  };
+  const addToCartHandler = () => {
+    const cookie = localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN);
+    if (!cookie) {
+      setShowAddError("Խնդրում ենք մուտք գործել");
+      setTimeout(() => {
+        setShowAddError("")
+      }, 1900)
+      return;
+    }
+    AddToCartFunction(
+      singleProduct?.id,
+      setAddToCartCatchError,
+      setAddToCartLoading,
+      setAnimationCart,
+    )
+  }
   return (
     <div className="mx-auto border-2 p-2 rounded-xl">
       {!singleProductTexts ? (
@@ -59,12 +66,6 @@ const SingleProduct = () => {
                 alt="products"
                 className="w-full h-[330px] md:h-[400px] lg:h-[500px] object-contain"
               />
-              {singleProduct?.stock_status ===
-                SINGLE_PRODUCT_TYPES.OUT_OFF_STOCK && (
-                  <div className="absolute px-3 rounded-full text-center bg-red-500 left-1 top-1  flex items-center justify-center p-1 text-white z-10">
-                    <p>{singleProductTexts?.notInStock.description}</p>
-                  </div>
-                )}
             </div>
             <div
               className={
@@ -85,7 +86,7 @@ const SingleProduct = () => {
                   <div>
                     <p className="text-[16px]">{singleProduct?.sku}</p>
                     <h1 className="text-[18px] xs:text-[25px] md:text[20px] lg:text-[2rem] font-[700]">
-                      {singleProduct?.name} ssdsdsdsds
+                      {singleProduct?.name}
                     </h1>
                   </div>
                 </div>
@@ -114,32 +115,21 @@ const SingleProduct = () => {
                 <div className="mt-2 lg:mt-4 lg:flex justify-between items-center">
                   <div>
                     <button
-                      disabled={
-                        singleProduct?.stock_status ===
-                          SINGLE_PRODUCT_TYPES.OUT_OFF_STOCK
-                          ? true
-                          : false
-                      }
-                      onClick={() =>
-                        AddToCartFunction(
-                          singleProduct?.id,
-                          productCount,
-                          setAddToCartCatchError,
-                          setAddToCartLoading,
-                          setAnimationCart,
-                          singleProduct?.stock_status,
-                          variationAttributes
-                        )
-                      }
+                      onClick={addToCartHandler}
                       className={
                         singleProduct?.stock_status ===
                           SINGLE_PRODUCT_TYPES.OUT_OFF_STOCK
                           ? "flex border-2 font-[600] text-[#a4a8a9] rounded-xl bg-transparent text-[14px] xs:text-[16px] px-5 py-[5px]  items-center justify-center"
                           : "border-2 text-[#384275] font-[600] border-[#384275] rounded-xl bg-transparent text-[14px] xs:text-[16px] px-5 py-[5px] flex items-center justify-center hover:border-cyan-700 cursor-pointer duration-150"
                       }
-                    >
-                      <p className="select-none">{singleProductTexts?.addToCart.description}</p>
-                      <CiHeart size={24} />
+                    >{showAddError ? (
+                      <p>{showAddError}</p>
+                    ) : (
+                      <>
+                        <p className="select-none">{singleProductTexts?.addToCart.description}</p>
+                        <CiHeart size={24} />
+                      </>
+                    )}
                     </button>
                     {addToCartLoading && (
                       <div className="flex items-center justify-center mt-2">

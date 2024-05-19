@@ -9,7 +9,6 @@ import ChooseComponent from "../header/components/SortHeader";
 
 const HomePage: React.FC = () => {
   const [URL_PARAMS, setURL_PARAMS] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const HomePage: React.FC = () => {
     isError,
     isLoading,
     productsData,
-  } = useBaseProducts(URL_PARAMS, currentPage);
+  } = useBaseProducts(URL_PARAMS);
 
   const { homePageTexts } = useHomePageTexts();
   return (

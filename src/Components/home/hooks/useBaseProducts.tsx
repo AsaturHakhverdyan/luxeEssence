@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { QUERY_PARAMS } from "../../../utils/constants/constants";
@@ -6,7 +6,6 @@ import { ICatchError, IProducts } from "../../../utils/interface";
 
 const useBaseProducts = (
   URL_PARAMS: string,
-  currentPage: number,
 ) => {
   const [productsData, setProductsData] = useState<IProducts[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);

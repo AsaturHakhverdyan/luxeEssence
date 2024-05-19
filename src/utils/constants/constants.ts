@@ -21,6 +21,8 @@ export const PAGES = {
   PRODUCT_ID: "/product/:id",
   BASKET: "/basket",
   CHECKOUT: "/checkout",
+  SIGNUP: "/signup",
+  ABOUTUS: "/aboutUs"
 };
 
 export const KEYS = {

@@ -5,7 +5,7 @@ import { MdAccessTime, MdOutlinePhoneInTalk } from "react-icons/md";
 const Footer = () => {
   const date = new Date().getFullYear()
   return (
-    <div className="mt-10 p-4 border-t-4 border-[#F1EFE8]">
+    <div id="footer" className="mt-10 p-4 border-t-4 border-[#F1EFE8]">
       <div className="md:flex justify-around flex-wrap text-c">
         <div className="flex items-center text-center mt-2 p-2">
           <IoLocationOutline size={24} />

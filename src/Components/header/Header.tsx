@@ -5,7 +5,7 @@ import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import { CiLogout, CiUser } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
-import axios from "axios";
+import photo from "./components/images/photo.jpg"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,9 +23,9 @@ const Header = () => {
   }, []);
 
   const logOut = async () => {
-    await axios.post("https://payl.10web.cloud/api/users/logout")
     localStorage.clear()
     setUserInfo("");
+    navigate(PAGES.HOME);
   };
 
   const showErrorMessage = () => {
@@ -65,11 +65,28 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <div className=" w-full flex justify-around">
+          <div className="h-[50px]">
+            <Link to={PAGES.HOME}>
+              <img src={photo} alt="logo" className="w-full h-full object-cover" />
+            </Link>
+          </div>
+          <div>
+            <a href="#footer" className="text-[24px] font-[700] hover:text-[#2b355d]">
+              Կոնտակտներ
+            </a>
+          </div>
+          <div>
+            <Link to={PAGES.ABOUTUS} className="text-[24px] font-[700] hover:text-[#2b355d]">
+              Մեր մասին
+            </Link>
+          </div>
+        </div>
         <div className="block md:flex items-center">
           <div className="flex items-center relative">
             {sayAboutLogin ? (
-              <div className="bg-red-200 py-1 px-4 rounded-lg duration-150">
-                <p>{`<--- Խնդրում ենք մուտք գործեք`}</p>
+              <div className="bg-red-200 py-1 px-4 rounded-lg duration-150 w-[280px] flex items-center justify-center absolute top-[4px] right-[50px]">
+                <p className="w-full">{`<--- Խնդրում ենք մուտք գործեք`}</p>
               </div>
             ) : null}
             <div className="flex mx-2" onClick={showErrorMessage}>

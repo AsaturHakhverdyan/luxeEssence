@@ -13,16 +13,15 @@ import { getNonce } from "../../../../basket/utils/Utils";
 
 export const AddToCartFunction = async (
   id: number | undefined,
-  count: number,
   setAddToCartCatchError: React.Dispatch<
     React.SetStateAction<ICatchError | undefined>
   >,
   setAddToCartLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setAnimationCart: React.Dispatch<React.SetStateAction<boolean>>,
-  variationAdd: string | undefined,
-  variationAttributes: IVariationAttributes[] | undefined
 ) => {
-  const cookie = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN) || '')
+
+  const cookie = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN) || '');
+
   try {
     setAddToCartLoading(true);
     setAnimationCart(true);
@@ -33,7 +32,7 @@ export const AddToCartFunction = async (
       const response = await axios.post(`https://hydralab-dev.10web.site/wp-json/add/wishlist?cookie=${cookie}`,
         {
           id: id,
-          quantity: count
+          quantity: 1
         },
         {
           headers: {
