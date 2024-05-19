@@ -79,7 +79,7 @@ const Header = () => {
           </div>
           <div>
             <a href="#footer" className="text-[20px] font-[700] hover:text-[#2b355d]">
-              Կամ Մեզ Հետ
+              Կապ Մեզ Հետ
             </a>
           </div>
           <div>
