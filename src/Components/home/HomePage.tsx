@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
   const { homePageTexts } = useHomePageTexts();
   return (
     <div>
-      <div className="border rounded-md">
+      <div className="border rounded-md bg-pink-50">
         <CategoriesHeader />
       </div>
       <div className="flex  items-center justify-between my-[24px]">

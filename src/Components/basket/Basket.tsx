@@ -6,13 +6,14 @@ import { IoMdArrowBack } from "react-icons/io";
 import useGetBasket from "./utils/useGetBasket";
 import BasketSkeleton from "../../skeleton/BasketSkeleton";
 import BasketProductItem from "./BasketProductItem";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdOutlinePhoneInTalk } from "react-icons/md";
 import { onRemoveAllBasket } from "./utils/onRemoveAllBasket";
 import Loader from "../../utils/loader/Loader";
 import useGetText from "./utils/useGetText";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { IBasketText } from "../../utils/interface";
+import { IoLocationOutline } from "react-icons/io5";
 
 const Basket = () => {
   const navigate = useNavigate();
@@ -93,6 +94,27 @@ const Basket = () => {
             </div>
           </div>
           <div>
+          <div>
+                  <br />
+                  <p>Պատվիրելու Համար ՝ </p>
+                  <div className="flex items-center mt-2 p-2 text-center border-t-2 md:border-0">
+                    <MdOutlinePhoneInTalk size={24} />
+                    <div className="ml-2">
+                      <p className="hover:underline duration-150">
+                        <a href="tel:+37490909090">+374 90 90 90 90</a>
+                      </p>
+                      <p className="hover:underline duration-150">
+                        <a href="tel:+37490909091">+374 90 90 90 91</a>
+                      </p>
+                    </div>
+                    <div className="flex items-center text-center mt-2 p-2">
+                      <IoLocationOutline size={24} />
+                      <h1 className="ml-2">
+                        <a href="https://maps.app.goo.gl/fHH69hE8YjFm2MwE7" target="_blank">Ալեք Մանուկյան 1</a>
+                      </h1>
+                    </div>
+                  </div>
+                </div>
             {basketProducts && basketProducts.length
               ? basketProducts.map((basketItem) => (
                 <BasketProductItem
@@ -111,6 +133,10 @@ const Basket = () => {
               ))
               : null}
           </div>
+          
+                <div>
+                  <p>Ընդհանուր գինը ՝ {allBasketItemPrice}</p>
+                </div>
           {basketProducts?.length && basketText ? (
             <div className="flex items-center justify-between p-[5px] border rounded-xl">
               <div className="flex">
